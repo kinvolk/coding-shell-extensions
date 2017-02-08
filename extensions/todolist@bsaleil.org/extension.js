@@ -168,7 +168,7 @@ TodoList.prototype._enable = function() {
 	this.monitor = fileM.monitor(Gio.FileMonitorFlags.NONE, null);
 	this.monitor.connect('changed', Lang.bind(this, this._refresh));
 
-	// Key binding
+	// Add key binding
 	Main.wm.addKeybinding('open-todolist',
 						  ExtensionSettings,
 						  Meta.KeyBindingFlags.NONE,
@@ -178,6 +178,8 @@ TodoList.prototype._enable = function() {
 
 // Disable method
 TodoList.prototype._disable = function() {
+	// Remove key binding
+	Main.wm.removeKeybinding('open-todolist');
 	// Stop monitoring file
 	this.monitor.cancel();
 }
